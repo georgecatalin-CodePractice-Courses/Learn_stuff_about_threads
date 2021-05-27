@@ -33,9 +33,14 @@ int my_function(char *cmd)
 	else if(pid==0)
 	{
 			//in this case it means we are in the child process, the newly generated process
-			char *argv[]={"vim","/home/georgeca/myPoem.txt",NULL};
+			char *argv[4];
+		
+			argv[0]="bash"; //the last element of the path from execv
+			argv[1]="-c";
+			argv[2]=cmd;
+			argv[3]=NULL;
 
-			int ret=execv("/bin/bash/vim",argv);
+			int ret=execv("/bin/bash",argv);
 
 			if(ret==-1)
 			{
